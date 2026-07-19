@@ -16,15 +16,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/vieiratq/sistema_ponto_eletronico/issues"
   },
   "homepage": "https://github.com/vieiratq/sistema_ponto_eletronico#readme",
   "dependencies": {
+    "connect-pg-simple": "^10.0.0",
     "dotenv": "^17.4.2",
     "env": "^0.0.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "pg": "^8.22.0",
+    "sessions": "^0.0.2-7"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
