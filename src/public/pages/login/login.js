@@ -1,5 +1,5 @@
 const formularioLogin = document.querySelector("#loginForm");
-const campoEmail = document.querySelector("#email");
+const campoCnpj = document.querySelector("#cnpj");
 const campoSenha = document.querySelector("#password");
 const botaoMostrarSenha = document.querySelector("#togglePassword");
 const mensagemFormulario = document.querySelector("#formMessage");
@@ -27,13 +27,13 @@ function alternarVisibilidadeDaSenha() {
   botaoMostrarSenha.setAttribute("aria-label", "Mostrar senha");
 }
 
-function validarLogin(email, senha) {
-  if (!email || !senha) {
+function validarLogin(cnpj, senha) {
+  if (!cnpj || !senha) {
     mostrarMensagem("Preencha e-mail e senha para continuar.");
     return false;
   }
 
-  if (!email.includes("@")) {
+  if (!cnpj.includes("@")) {
     mostrarMensagem("Digite um e-mail valido.");
     return false;
   }
@@ -43,11 +43,11 @@ function validarLogin(email, senha) {
 
 function enviarLogin(evento) {
   evento.preventDefault();
-  if (!campoEmail || !campoSenha) return;
+  if (!campoCnpj || !campoSenha) return;
 
-  const email = campoEmail.value.trim();
+  const cnpj = campoCnpj.value.trim();
   const senha = campoSenha.value.trim();
-  const loginValido = validarLogin(email, senha);
+  const loginValido = validarLogin(cnpj, senha);
   if (!loginValido) return;
   mostrarMensagem("");
 
