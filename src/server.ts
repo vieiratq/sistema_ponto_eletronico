@@ -7,7 +7,7 @@ const db = require("./routes/dataBaseRoutes");
 const app = express();
 const port = process.env.PORT || 3000;
 const publicPath = path.resolve(__dirname, "public");
-
+const loginRoutes = require("./routes/loginRoutes");
 app.use(express.static(publicPath));
 app.use(express.json());
 app.use(session({
@@ -26,6 +26,11 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24
     }
 }));
+
+
+
+app.use(loginRoutes);
+
 
 app.get("/", (req: any, res: any) => {
     res.sendFile("./pages/login/login.html", { root: publicPath });

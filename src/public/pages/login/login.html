@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login | Sistema de Ponto</title>
-  <link rel="stylesheet" href="./../pages/login/login.css">
+  <link rel="stylesheet" href="/pages/login/login.css">
 </head>
+
 <body>
   <main class="login-page">
     <section class="brand-panel" aria-label="Apresentacao do sistema">
@@ -25,25 +27,12 @@
 
       <form id="loginForm" class="login-form" novalidate>
         <label for="email">E-mail</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autocomplete="email"
-          placeholder="voce@empresa.com"
-          required
-        >
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@empresa.com" required>
 
         <label for="password">Senha</label>
         <div class="password-field">
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autocomplete="current-password"
-            placeholder="Digite sua senha"
-            required
-          >
+          <input id="password" name="password" type="password" autocomplete="current-password"
+            placeholder="Digite sua senha" required>
           <button id="togglePassword" type="button" aria-label="Mostrar senha">Mostrar</button>
         </div>
 
@@ -58,6 +47,7 @@
     </section>
   </main>
 
-  <script type="module" src="./../pages/login/login.js"></script>
+  <script type="module" src="/pages/login/login.js"></script>
 </body>
+
 </html>
