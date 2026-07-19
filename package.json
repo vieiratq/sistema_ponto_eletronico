@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon --watch src --ext ts --exec tsx src/server.ts",
+    "build": "node scripts/copy-public.mjs && tsc",
+    "start": "node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -14,17 +16,21 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/vieiratq/sistema_ponto_eletronico/issues"
   },
   "homepage": "https://github.com/vieiratq/sistema_ponto_eletronico#readme",
   "dependencies": {
     "dotenv": "^17.4.2",
+    "env": "^0.0.2",
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.1.1",
+    "nodemon": "^3.1.14",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
   }
 }
-
