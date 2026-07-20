@@ -29,12 +29,12 @@ function alternarVisibilidadeDaSenha() {
 
 function validarLogin(cnpj, senha) {
   if (!cnpj || !senha) {
-    mostrarMensagem("Preencha e-mail e senha para continuar.");
+    mostrarMensagem("Preencha cnpj e senha para continuar.");
     return false;
   }
-
-  if (!cnpj.includes("@")) {
-    mostrarMensagem("Digite um e-mail valido.");
+  const cnpjStrip = cnpj.replace(/\D/g, "");
+  if (!(cnpjStrip.length === 11)) {
+    mostrarMensagem("Digite um Cnpj valido.");
     return false;
   }
 

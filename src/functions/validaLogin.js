@@ -4,7 +4,7 @@ function validaLogin(req, res, next) {
     return;
   }
 
-  res.redirect("/login");
+  res.redirect("/");
 }
 module.exports = validaLogin
-export {}
+export { }
