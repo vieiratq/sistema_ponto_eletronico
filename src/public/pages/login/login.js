@@ -41,17 +41,27 @@ function validarLogin(cnpj, senha) {
   return true;
 }
 
-function enviarLogin(evento) {
+async function enviarLogin(evento) {
   evento.preventDefault();
   if (!campoCnpj || !campoSenha) return;
 
   const cnpj = campoCnpj.value.trim();
   const senha = campoSenha.value.trim();
   const loginValido = validarLogin(cnpj, senha);
+
   if (!loginValido) return;
   mostrarMensagem("");
 
+  const resposta = await fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ cnpj, senha }),
+  })
+  const dados = await resposta.json();
+  if (resposta.status === 200) {
 }
-
+}
 botaoMostrarSenha?.addEventListener("click", alternarVisibilidadeDaSenha);
 formularioLogin?.addEventListener("submit", enviarLogin);
