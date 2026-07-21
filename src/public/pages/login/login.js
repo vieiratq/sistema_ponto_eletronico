@@ -30,29 +30,39 @@ function alternarVisibilidadeDaSenha() {
 
 function validarLogin(cnpj, senha) {
   if (!cnpj || !senha) {
-    mostrarMensagem("Preencha e-mail e senha para continuar.");
+    mostrarMensagem("Preencha cnpj e senha para continuar.");
     return false;
   }
-
-  if (!cnpj.includes("@")) {
-    mostrarMensagem("Digite um e-mail valido.");
+  const cnpjStrip = cnpj.replace(/\D/g, "");
+  if (!(cnpjStrip.length === 11)) {
+    mostrarMensagem("Digite um Cnpj valido.");
     return false;
   }
 
   return true;
 }
 
-function enviarLogin(evento) {
+async function enviarLogin(evento) {
   evento.preventDefault();
   if (!campoCnpj || !campoSenha) return;
 
   const cnpj = campoCnpj.value.trim();
   const senha = campoSenha.value.trim();
   const loginValido = validarLogin(cnpj, senha);
+
   if (!loginValido) return;
   mostrarMensagem("");
 
+  const resposta = await fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ cnpj, senha }),
+  })
+  const dados = await resposta.json();
+  if (resposta.status === 200) {
 }
-
+}
 botaoMostrarSenha?.addEventListener("click", alternarVisibilidadeDaSenha);
 formularioLogin?.addEventListener("submit", enviarLogin);

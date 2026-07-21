@@ -3,7 +3,7 @@ const campoEmail = document.querySelector<HTMLInputElement>("#email");
 const campoSenha = document.querySelector<HTMLInputElement>("#password");
 const botaoMostrarSenha = document.querySelector<HTMLButtonElement>("#togglePassword");
 const mensagemFormulario = document.querySelector<HTMLParagraphElement>("#formMessage");
-
+const campoCnpj = document.querySelector<HTMLInputElement>("#cnpj");
 function mostrarMensagem(texto: string): void {
   if (!mensagemFormulario) return;
 
@@ -27,34 +27,43 @@ function alternarVisibilidadeDaSenha(): void {
   botaoMostrarSenha.setAttribute("aria-label", "Mostrar senha");
 }
 
-function validarLogin(email: string, senha: string): boolean {
-  if (!email || !senha) {
-    mostrarMensagem("Preencha e-mail e senha para continuar.");
+function validarLogin(cnpj:string, senha:string) {
+  if (!cnpj || !senha) {
+    mostrarMensagem("Preencha cnpj e senha para continuar.");
     return false;
   }
-
-  if (!email.includes("@")) {
-    mostrarMensagem("Digite um e-mail valido.");
+  const cnpjStrip = cnpj.replace(/\D/g, "");
+  if (!(cnpjStrip.length === 14)) {
+    mostrarMensagem("Digite um Cnpj valido.");
     return false;
   }
 
   return true;
 }
 
-function enviarLogin(evento: SubmitEvent): void {
+
+async function enviarLogin(evento:Event) {
   evento.preventDefault();
+  if (!campoCnpj || !campoSenha) return;
 
-  if (!campoEmail || !campoSenha) return;
-
-  const email = campoEmail.value.trim();
+  const cnpj = campoCnpj.value.trim();
   const senha = campoSenha.value.trim();
-  const loginValido = validarLogin(email, senha);
+  const loginValido = validarLogin(cnpj, senha);
 
   if (!loginValido) return;
-
   mostrarMensagem("");
-  console.log("Login enviado", { email });
-}
+
+  const resposta = await fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ cnpj, senha }),
+  })
+  const dados = await resposta.json();
+  if (resposta.status === 200) {
+}}
+
 
 botaoMostrarSenha?.addEventListener("click", alternarVisibilidadeDaSenha);
 formularioLogin?.addEventListener("submit", enviarLogin);

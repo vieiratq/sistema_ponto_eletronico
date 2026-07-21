@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch src --ext ts --exec tsx src/server.ts",
-    "build": "node scripts/copy-public.mjs && tsc",
+    "dev": "nodemon --watch src --ext ts,js,html,css --exec tsx src/server.ts",
+    "build": "tsup src/server.ts --out-dir dist && xcopy src\\public dist\\public /E /I /Y",
     "start": "node dist/server.js"
   },
   "repository": {
@@ -37,6 +37,7 @@
     "@types/express-session": "^1.19.0",
     "@types/node": "^26.1.1",
     "nodemon": "^3.1.14",
+    "tsup": "^8.5.1",
     "tsx": "^4.23.1",
     "typescript": "^7.0.2"
   }
