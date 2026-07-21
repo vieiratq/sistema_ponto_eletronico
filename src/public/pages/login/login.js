@@ -1,10 +1,9 @@
 const formularioLogin = document.querySelector("#loginForm");
-const campoCnpj = document.querySelector("#cnpj");
+const campoEmail = document.querySelector("#email");
 const campoSenha = document.querySelector("#password");
 const botaoMostrarSenha = document.querySelector("#togglePassword");
 const mensagemFormulario = document.querySelector("#formMessage");
-const bcrypt = require("bcrypt");
-
+const campoCnpj = document.querySelector("#cnpj");
 function mostrarMensagem(texto) {
   if (!mensagemFormulario) return;
 
@@ -34,13 +33,14 @@ function validarLogin(cnpj, senha) {
     return false;
   }
   const cnpjStrip = cnpj.replace(/\D/g, "");
-  if (!(cnpjStrip.length === 11)) {
+  if (!(cnpjStrip.length === 14)) {
     mostrarMensagem("Digite um Cnpj valido.");
     return false;
   }
 
   return true;
 }
+
 
 async function enviarLogin(evento) {
   evento.preventDefault();
@@ -51,6 +51,7 @@ async function enviarLogin(evento) {
   const loginValido = validarLogin(cnpj, senha);
 
   if (!loginValido) return;
+
   mostrarMensagem("");
 
   const resposta = await fetch("/login", {
@@ -60,9 +61,25 @@ async function enviarLogin(evento) {
     },
     body: JSON.stringify({ cnpj, senha }),
   })
-  const dados = await resposta.json();
-  if (resposta.status === 200) {
+
 }
-}
-botaoMostrarSenha?.addEventListener("click", alternarVisibilidadeDaSenha);
-formularioLogin?.addEventListener("submit", enviarLogin);
+
+
+botaoMostrarSenha.addEventListener("click", ()=>{
+    if (!campoSenha || !botaoMostrarSenha) return;
+
+  const senhaEstaEscondida = campoSenha.type === "password";
+
+  if (senhaEstaEscondida) {
+    campoSenha.type = "text";
+    botaoMostrarSenha.textContent = "Ocultar";
+    botaoMostrarSenha.setAttribute("aria-label", "Ocultar senha");
+    return;
+  }
+
+  campoSenha.type = "password";
+  botaoMostrarSenha.textContent = "Mostrar";
+  botaoMostrarSenha.setAttribute("aria-label", "Mostrar senha");
+});
+
+formularioLogin.addEventListener("submit", enviarLogin);

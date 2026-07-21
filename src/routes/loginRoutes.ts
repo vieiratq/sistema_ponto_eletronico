@@ -11,22 +11,10 @@ router.get("/login", (req: Request, res: Response) => {
 });
 
 router.post("/login", async (req: Request, res: Response) => {
+  console.log(req.body)
   const { cnpj, password } = req.body;
   const passHash = bcrypt.hashSync(password, saltRounds);
-  db.query("SELECT email,password,nome,usuarios,cnpj,id FROM empresas WHERE cnpj = $1 ", [cnpj], (err: Error, result: any) => {
-    if (err) {
-      console.log(err);
-      return res.json({ message: "erro ao conectar ao banco de dados" });
-    }
-    const user = result.rows[0];
-    if (user.password == passHash) {
-      req.session.empresa = {
-        id: user.id,
-        email: user.email,
-        cnpj: user.cnpj
-      }
-    }
-  })
+  
 });
 
 module.exports = router;
