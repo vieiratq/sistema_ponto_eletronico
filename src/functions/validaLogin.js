@@ -7,4 +7,3 @@ function validaLogin(req, res, next) {
   res.redirect("/");
 }
 module.exports = validaLogin
-export { }

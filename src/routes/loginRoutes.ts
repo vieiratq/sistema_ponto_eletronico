@@ -6,7 +6,6 @@ const path = require("path");
 const saltRounds = process.env.SALTROUNDS;
 const bcrypt = require("bcrypt");
 import type { Request, Response } from "express";
-
 router.get("/login", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../public/pages/login/login.html"));
 });
@@ -14,19 +13,20 @@ router.get("/login", (req: Request, res: Response) => {
 router.post("/login", async (req: Request, res: Response) => {
   const { cnpj, password } = req.body;
   const passHash = bcrypt.hashSync(password, saltRounds);
-  db.query("SELECT email,password,nome,usuarios FROM empresas WHERE cnpj = $1 ", [cnpj], (err: Error, result: any) => {
+  db.query("SELECT email,password,nome,usuarios,cnpj,id FROM empresas WHERE cnpj = $1 ", [cnpj], (err: Error, result: any) => {
     if (err) {
       console.log(err);
       return res.json({ message: "erro ao conectar ao banco de dados" });
     }
     const user = result.rows[0];
     if (user.password == passHash) {
-      req.session.user = user;
-      req.session.empresa = user.nome;
-
+      req.session.empresa = {
+        id: user.id,
+        email: user.email,
+        cnpj: user.cnpj
+      }
     }
   })
 });
 
 module.exports = router;
-export { };
