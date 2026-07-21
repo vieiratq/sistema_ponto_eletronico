@@ -3,6 +3,7 @@ const campoCnpj = document.querySelector("#cnpj");
 const campoSenha = document.querySelector("#password");
 const botaoMostrarSenha = document.querySelector("#togglePassword");
 const mensagemFormulario = document.querySelector("#formMessage");
+const bcrypt = require("bcrypt");
 
 function mostrarMensagem(texto) {
   if (!mensagemFormulario) return;
