@@ -8,5 +8,7 @@ declare module "express-session" {
       cnpj?: string;
       nome?: string;
     };
+    logado?: boolean;
+    
   }
 }

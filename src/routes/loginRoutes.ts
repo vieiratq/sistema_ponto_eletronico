@@ -13,20 +13,21 @@ router.get("/login", (req: Request, res: Response) => {
 
 router.post("/login", async (req: Request, res: Response) => {
   const { cnpj, password } = req.body;
-  db.query("SELECT nome,cnpj,password,id,email FROM empresas WHERE cnpj = $1", [cnpj],async (err: any, result: any) => {
+  db.query("SELECT nome,cnpj,password,id,email FROM empresas WHERE cnpj = $1", [cnpj], async (err: any, result: any) => {
     if (err) {
       console.log(err);
       return res.json({ success: false, message: "login invalido!" });
     }
     const empresa = result.rows[0];
     const senhaValida = await bcrypt.compare(password, empresa.password);
-    
-    if(empresa == undefined){
+
+    if (empresa == undefined) {
       return res.json({ success: false, message: "login invalido!" });
     }
     if (!(senhaValida)) {
       return res.json({ success: false, message: "login invalido!" });
     }
+    req.session.logado = true;
     req.session.empresa = {
       id: empresa.id,
       email: empresa.email,
@@ -37,6 +38,10 @@ router.post("/login", async (req: Request, res: Response) => {
   })
 
 
+});
+
+router.get("/dashboard", validaLogin, (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../public/pages/dashboard/dashboard.html"));
 });
 
 module.exports = router;

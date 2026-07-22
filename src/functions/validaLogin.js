@@ -1,5 +1,5 @@
 function validaLogin(req, res, next) {
-  if (req.session && req.session.user) {
+  if (req.session.logado && req.session.empresa.id) {
     next();
     return;
   }
