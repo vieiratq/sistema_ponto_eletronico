@@ -1,14 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Painel de ponto</title>
+    <link rel="stylesheet" href="/pages/dashboard/dash.css">
 </head>
 
 <body>
-    logado
+    <div class="dashboard-shell">
+        <aside class="sidebar">
+            <a class="brand" href="#inicio" aria-label="Ir para o início">
+                <span class="brand-mark" aria-hidden="true">P</span>
+                <span>
+                    <strong>Ponto</strong>
+                    <small>Gestão de jornada</small>
+                </span>
+            </a>
+
+            <nav class="menu" aria-label="Menu principal">
+                <a class="menu-link active" href="#inicio">Visão geral</a>
+
+                <details class="menu-section" name="menu-dashboard">
+                    <summary>
+                        <span>Funcionários</span>
+                        <small>24</small>
+                    </summary>
+                    <div class="menu-panel">
+                        <a href="#funcionarios">Ver funcionários</a>
+                        <a href="#funcionarios">Novo funcionário</a>
+                    </div>
+                </details>
+
+                <details class="menu-section" name="menu-dashboard">
+                    <summary><span>Configurações</span></summary>
+                    <div class="menu-panel">
+                        <a href="#configuracoes">Dados da empresa</a>
+                        <a href="#configuracoes">Jornada e tolerância</a>
+                    </div>
+                </details>
+
+                <details class="menu-section" name="menu-dashboard">
+                    <summary><span>Até o momento</span></summary>
+                    <div class="menu-panel">
+                        <a href="#momento">Resumo de hoje</a>
+                        <a href="#momento">Situação da equipe</a>
+                    </div>
+                </details>
+
+                <details class="menu-section" name="menu-dashboard">
+                    <summary><span>Histórico de ponto</span></summary>
+                    <div class="menu-panel">
+                        <a href="#historico">Consultar registros</a>
+                        <a href="#historico">Relatórios</a>
+                    </div>
+                </details>
+            </nav>
+
+            <div class="sidebar-user">
+                <span class="user-avatar" aria-hidden="true">JP</span>
+                <span>
+                    <strong>João Pedro</strong>
+                    <small>Administrador</small>
+                </span>
+            </div>
+        </aside>
+
+        <main class="content" id="inicio">
+            <header class="page-header">
+                <div>
+                    <p>Painel</p>
+                    <h1>Visão geral</h1>
+                </div>
+                <span class="today-status"><i aria-hidden="true"></i> Sistema ativo</span>
+            </header>
+
+            <section class="company-panel" aria-labelledby="company-title">
+                <div class="company-info">
+                    <span class="section-label">Empresa</span>
+                    <h2 id="company-title">Empresa Exemplo LTDA</h2>
+                    <p>CNPJ 00.000.000/0001-00</p>
+                </div>
+
+                <div class="clock-area">
+                    <p>
+                        <span>Último registro</span>
+                        <strong>Entrada às 08:02</strong>
+                    </p>
+                    <button class="clock-button" type="button" popovertarget="registro-ponto">
+                        <span>Bater ponto</span>
+                        <small>Registrar agora</small>
+                    </button>
+                </div>
+            </section>
+
+            <section class="summary-grid" aria-label="Resumo de hoje">
+                <article>
+                    <span>Presentes hoje</span>
+                    <strong>18 <small>de 24</small></strong>
+                </article>
+                <article>
+                    <span>Em intervalo</span>
+                    <strong>3</strong>
+                </article>
+                <article>
+                    <span>Sem registro</span>
+                    <strong>3</strong>
+                </article>
+                <article>
+                    <span>Horas trabalhadas</span>
+                    <strong>4h 12min</strong>
+                </article>
+            </section>
+
+            <div class="dashboard-grid">
+                <section class="panel records-panel" id="historico" aria-labelledby="records-title">
+                    <header class="panel-header">
+                        <div>
+                            <span class="section-label">Seu ponto</span>
+                            <h2 id="records-title">Registros de hoje</h2>
+                        </div>
+                        <a href="#historico-completo">Ver histórico</a>
+                    </header>
+
+                    <ol class="record-list">
+                        <li>
+                            <span class="record-dot complete" aria-hidden="true"></span>
+                            <div>
+                                <strong>Entrada</strong>
+                                <small>Registrado</small>
+                            </div>
+                            <time datetime="08:02">08:02</time>
+                        </li>
+                        <li>
+                            <span class="record-dot complete" aria-hidden="true"></span>
+                            <div>
+                                <strong>Saída para intervalo</strong>
+                                <small>Registrado</small>
+                            </div>
+                            <time datetime="12:01">12:01</time>
+                        </li>
+                        <li>
+                            <span class="record-dot pending" aria-hidden="true"></span>
+                            <div>
+                                <strong>Retorno do intervalo</strong>
+                                <small>Próximo registro</small>
+                            </div>
+                            <time>--:--</time>
+                        </li>
+                        <li>
+                            <span class="record-dot" aria-hidden="true"></span>
+                            <div>
+                                <strong>Saída</strong>
+                                <small>Pendente</small>
+                            </div>
+                            <time>--:--</time>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="panel team-panel" id="momento" aria-labelledby="team-title">
+                    <header class="panel-header">
+                        <div>
+                            <span class="section-label">Agora</span>
+                            <h2 id="team-title">Situação da equipe</h2>
+                        </div>
+                    </header>
+
+                    <dl class="team-list">
+                        <div>
+                            <dt><i class="status-dot working" aria-hidden="true"></i> Trabalhando</dt>
+                            <dd>18</dd>
+                        </div>
+                        <div>
+                            <dt><i class="status-dot break" aria-hidden="true"></i> Em intervalo</dt>
+                            <dd>3</dd>
+                        </div>
+                        <div>
+                            <dt><i class="status-dot absent" aria-hidden="true"></i> Sem entrada</dt>
+                            <dd>3</dd>
+                        </div>
+                    </dl>
+
+                    <a class="team-link" id="funcionarios" href="#funcionarios">Abrir funcionários</a>
+                </section>
+            </div>
+
+            <span id="configuracoes" aria-hidden="true"></span>
+            <span id="historico-completo" aria-hidden="true"></span>
+        </main>
+    </div>
+
+    <div class="point-popover" id="registro-ponto" popover>
+        <button class="popover-close" type="button" popovertarget="registro-ponto"
+            popovertargetaction="hide" aria-label="Fechar">×</button>
+        <span class="popover-icon" aria-hidden="true">✓</span>
+        <h2>Ponto registrado</h2>
+        <p>O registro foi incluído na jornada de hoje.</p>
+        <button class="popover-done" type="button" popovertarget="registro-ponto"
+            popovertargetaction="hide">Concluir</button>
+    </div>
 </body>
 
 </html>

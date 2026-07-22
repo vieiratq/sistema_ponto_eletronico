@@ -41,7 +41,7 @@ router.post("/login", async (req: Request, res: Response) => {
 });
 
 router.get("/dashboard", validaLogin, (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "../public/pages/dashboard/dashboard.html"));
+  res.sendFile(path.join(__dirname, "../public/pages/dashboard/dash.html"));
 });
 
 module.exports = router;
