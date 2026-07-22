@@ -6,15 +6,37 @@ const path = require("path");
 const saltRounds = process.env.SALTROUNDS;
 const bcrypt = require("bcrypt");
 import type { Request, Response } from "express";
+
 router.get("/login", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../public/pages/login/login.html"));
 });
 
 router.post("/login", async (req: Request, res: Response) => {
-  console.log(req.body)
   const { cnpj, password } = req.body;
-  const passHash = bcrypt.hashSync(password, saltRounds);
-  
+  db.query("SELECT nome,cnpj,password,id,email FROM empresas WHERE cnpj = $1", [cnpj],async (err: any, result: any) => {
+    if (err) {
+      console.log(err);
+      return res.json({ success: false, message: "login invalido!" });
+    }
+    const empresa = result.rows[0];
+    const senhaValida = await bcrypt.compare(password, empresa.password);
+    
+    if(empresa == undefined){
+      return res.json({ success: false, message: "login invalido!" });
+    }
+    if (!(senhaValida)) {
+      return res.json({ success: false, message: "login invalido!" });
+    }
+    req.session.empresa = {
+      id: empresa.id,
+      email: empresa.email,
+      cnpj: empresa.cnpj,
+      nome: empresa.nome
+    }
+    return res.json({ success: true, message: "logado com sucesso!" });
+  })
+
+
 });
 
 module.exports = router;

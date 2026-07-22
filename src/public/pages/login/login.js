@@ -47,8 +47,8 @@ async function enviarLogin(evento) {
   if (!campoCnpj || !campoSenha) return;
 
   const cnpj = campoCnpj.value.trim();
-  const senha = campoSenha.value.trim();
-  const loginValido = validarLogin(cnpj, senha);
+  const password = campoSenha.value.trim();
+  const loginValido = validarLogin(cnpj, password);
 
   if (!loginValido) return;
 
@@ -59,14 +59,20 @@ async function enviarLogin(evento) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ cnpj, senha }),
+    body: JSON.stringify({ cnpj, password }),
   })
-
+  const dados = await resposta.json();
+  if (!(dados.success)){
+    mostrarMensagem(dados.message);
+  }
+  if (dados.success) {
+    window.location.href = "/dashboard";
+  }
 }
 
 
-botaoMostrarSenha.addEventListener("click", ()=>{
-    if (!campoSenha || !botaoMostrarSenha) return;
+botaoMostrarSenha.addEventListener("click", () => {
+  if (!campoSenha || !botaoMostrarSenha) return;
 
   const senhaEstaEscondida = campoSenha.type === "password";
 
