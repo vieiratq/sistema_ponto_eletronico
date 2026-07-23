@@ -88,7 +88,7 @@
                         <span>Último registro</span>
                         <strong>Entrada às 08:02</strong>
                     </p>
-                    <button class="clock-button" type="button" popovertarget="registro-ponto">
+                    <button class="clock-button" type="button" popovertarget="registro-ponto" id="registrar">
                         <span>Bater ponto</span>
                         <small>Registrar agora</small>
                     </button>
@@ -193,14 +193,27 @@
     </div>
 
     <div class="point-popover" id="registro-ponto" popover>
-        <button class="popover-close" type="button" popovertarget="registro-ponto"
-            popovertargetaction="hide" aria-label="Fechar">×</button>
-        <span class="popover-icon" aria-hidden="true">✓</span>
-        <h2>Ponto registrado</h2>
-        <p>O registro foi incluído na jornada de hoje.</p>
-        <button class="popover-done" type="button" popovertarget="registro-ponto"
-            popovertargetaction="hide">Concluir</button>
+        <button class="popover-close" type="button" popovertarget="registro-ponto" popovertargetaction="hide"
+            aria-label="Fechar">×</button>
+        <span class="section-label">Registro de ponto</span>
+        <h2>Senha do funcionário</h2>
+        <p>Informe a senha para confirmar o ponto eletrônico deste funcionário.</p>
+
+        <form class="point-form" id="form-registro">
+            <label for="senha-funcionario">Senha</label>
+            <input id="senha-funcionario" name="senhaFuncionario" type="password" minlength="4"
+                autocomplete="current-password" placeholder="Digite a senha" required>
+
+            <p class="form-feedback" id="registro-feedback" role="status" aria-live="polite"></p>
+
+            <div class="popover-actions">
+                <button class="popover-cancel" type="button" popovertarget="registro-ponto"
+                    popovertargetaction="hide">Cancelar</button>
+                <button class="popover-done" type="submit">Registrar ponto</button>
+            </div>
+        </form>
     </div>
+    <script src="/pages/dashboard/dash.js" defer></script>
 </body>
 
 </html>
