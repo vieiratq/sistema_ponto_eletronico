@@ -5,7 +5,6 @@ import type { Request, Response } from "express";
 
 
 router.post("/api/registro-ponto", (req:Request, res:Response) =>{
-    console.log(req.body.senha);
     res.json({ message: "Registro feito com sucesso!"})
 })
 
