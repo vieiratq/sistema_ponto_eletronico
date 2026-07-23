@@ -1,7 +1,12 @@
-const router = require("express").Router();
-const db = require("./dataBaseRoutes");
-const validaLogin = require("../functions/validaLogin.js");
+const express = require("express");
+const router = express.Router();
+const db = require("./dataBaseRoutes.ts");
+import type { Request, Response } from "express";
 
-router.get("/api/registro-ponto", (req:Request, res:Response) =>{
-    console.log(req.body);
+
+router.post("/api/registro-ponto", (req:Request, res:Response) =>{
+    console.log(req.body.senha);
+    res.json({ message: "Registro feito com sucesso!"})
 })
+
+module.exports = router

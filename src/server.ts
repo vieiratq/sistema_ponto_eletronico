@@ -8,6 +8,9 @@ const app = express();
 const port = process.env.PORT || 3000;
 const publicPath = path.resolve(__dirname, "public");
 const loginRoutes = require("./routes/loginRoutes");
+const pontosRoutes = require("./routes/pontosRoutes");
+const reloadRoutes = require("./routes/reloadRoutes");
+
 app.use(express.static(publicPath));
 app.use(express.json());
 app.use(session({
@@ -30,6 +33,8 @@ app.use(session({
 
 
 app.use(loginRoutes);
+app.use(pontosRoutes);
+app.use(reloadRoutes);
 
 
 app.get("/", (req: any, res: any) => {

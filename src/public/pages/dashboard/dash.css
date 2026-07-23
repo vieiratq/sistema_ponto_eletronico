@@ -15,6 +15,7 @@
     --green-soft: #e9f4ef;
     --yellow: #d99a27;
     --red: #c05252;
+    --red-dark: #9e3f3f;
 }
 
 html {
@@ -190,7 +191,8 @@ summary {
 }
 
 .sidebar-user {
-    display: flex;
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
     align-items: center;
     gap: 10px;
     min-width: 0;
@@ -205,12 +207,47 @@ summary {
     font-size: 0.78rem;
 }
 
-.sidebar-user > span:last-child {
+.user-info {
+    flex: 1 1 auto;
     min-width: 0;
 }
 
 .sidebar-user strong {
     font-size: 0.87rem;
+}
+
+.logout-form {
+    grid-column: 2;
+    width: max-content;
+    max-width: 100%;
+    margin: 2px 0 0;
+}
+
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 30px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 6px;
+    background: var(--red);
+    color: var(--white);
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.logout-button:hover,
+.logout-button:focus-visible {
+    background: var(--red-dark);
+    color: var(--white);
+    outline: none;
+}
+
+.logout-button i {
+    font-size: 0.82rem;
 }
 
 .content {
@@ -712,7 +749,9 @@ summary {
     }
 
     .sidebar-user {
-        display: none;
+        display: grid;
+        margin-top: 16px;
+        padding-top: 16px;
     }
 
     .content {

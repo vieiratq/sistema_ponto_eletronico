@@ -68,6 +68,7 @@ async function enviarLogin(evento) {
   if (dados.success) {
     window.location.href = "/dashboard";
   }
+  
 }
 
 

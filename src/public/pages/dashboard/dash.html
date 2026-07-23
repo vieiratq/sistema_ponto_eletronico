@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel de ponto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="/pages/dashboard/dash.css">
 </head>
 
@@ -13,7 +14,7 @@
         <aside class="sidebar">
             <a class="brand" href="#inicio" aria-label="Ir para o início">
                 <span class="brand-mark" aria-hidden="true">P</span>
-                <span>
+                <span class="user-info">
                     <strong>Ponto</strong>
                     <small>Gestão de jornada</small>
                 </span>
@@ -60,10 +61,16 @@
 
             <div class="sidebar-user">
                 <span class="user-avatar" aria-hidden="true">JP</span>
-                <span>
+                <span class="user-info">
                     <strong>João Pedro</strong>
                     <small>Administrador</small>
                 </span>
+                <form class="logout-form" action="/logout" method="post">
+                    <button class="logout-button" type="submit">
+                        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                        <span>Sair</span>
+                    </button>
+                </form>
             </div>
         </aside>
 
@@ -80,7 +87,7 @@
                 <div class="company-info">
                     <span class="section-label">Empresa</span>
                     <h2 id="company-title">Empresa Exemplo LTDA</h2>
-                    <p>CNPJ 00.000.000/0001-00</p>
+                    <p id="cnpjTittle">CNPJ 00.000.000/0001-00</p>
                 </div>
 
                 <div class="clock-area">

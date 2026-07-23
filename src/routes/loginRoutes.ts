@@ -34,7 +34,7 @@ router.post("/login", async (req: Request, res: Response) => {
       cnpj: empresa.cnpj,
       nome: empresa.nome
     }
-    return res.json({ success: true, message: "logado com sucesso!" });
+    return res.json({ success: true, message: "logado com sucesso!", nome: empresa.nome, cnpj: empresa.cnpj,  email: empresa.email, id: empresa.id });
   })
 
 
@@ -42,6 +42,17 @@ router.post("/login", async (req: Request, res: Response) => {
 
 router.get("/dashboard", validaLogin, (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../public/pages/dashboard/dash.html"));
+});
+
+router.post("/logout", (req: Request, res: Response) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.redirect("/dashboard");
+    }
+
+    res.clearCookie("connect.sid");
+    return res.redirect("/login");
+  });
 });
 
 module.exports = router;
